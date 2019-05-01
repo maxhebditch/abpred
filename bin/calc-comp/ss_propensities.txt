@@ -1,0 +1,25 @@
+comment amino acid sec struc propensities from
+comment Constantini et al (2006) BBRC 342:441-451
+comment aa3 aa1  freq    Pa    Pb    Pc
+data    ALA   A  7.73  1.39  0.75  0.80
+data    CYS   C  1.84  0.74  1.31  1.05
+data    ASP   D  5.82  0.89  0.55  1.33
+data    GLU   E  6.61  1.35  0.72  0.86
+data    PHE   F  4.05  1.01  1.43  0.76
+data    GLY   G  7.11  0.47  0.65  1.62
+data    HIS   H  2.35  0.92  0.99  1.07
+data    ILE   I  5.66  1.04  1.71  0.59
+data    LYS   K  6.27  1.11  0.83  1.00
+data    LEU   L  8.83  1.32  1.10  0.68
+data    MET   M  2.08  1.21  0.99  0.83
+data    ASN   N  4.50  0.77  0.62  1.39
+data    PRO   P  4.52  0.50  0.44  1.72
+data    GLN   Q  3.94  1.29  0.76  0.89
+data    ARG   R  5.03  1.17  0.91  0.91
+data    SER   S  6.13  0.82  0.85  1.24
+data    THR   T  5.53  0.76  1.23  1.07
+data    VAL   V  6.91  0.89  1.86  0.64
+data    TRP   W  1.51  1.06  1.30  0.79
+data    TYR   Y  3.54  0.95  1.50  0.78
+comment suggested algorithm is simply to sum over
+comment window (eg 7) and take largest value = ss

@@ -1,0 +1,68 @@
+args            <- commandArgs(TRUE)
+calcID          <- args[1]
+curDir          <- args[2]
+
+features.list   <- c("A","C","D","E","F","G","H","I","K","L","M","N","P","Q","R","S","T","V","W","Y","K...R","D...E","Number.of.amino.acids","KpR","DpE","PmN","PpN","F.W.Y","pI","kyte.doolittle",'absolute.charge','Fold.propensity','disorder','entropy','beta.proprensity')
+
+
+ab137.df        <- read.csv(file=paste(curDir,"/resources/ab137-comp.csv",sep=""), header=TRUE, sep=",")
+scaled.ab137    <- scale(ab137.df[,features.list])
+
+new.df          <- read.csv(file=paste(calcID,"_table_composition.csv",sep=""), header=TRUE, sep=",")
+protein.names   <- (new.df[["antibody"]])
+protein.names   <- gsub(">", "", protein.names)
+new.df.feats    <- new.df[,features.list]
+
+scaled.new      <- scale(new.df.feats, attr(scaled.ab137, "scaled:center"), attr(scaled.ab137, "scaled:scale"))
+
+HIC.model       <- readRDS(paste(curDir,"/resources/HIC-model.rds",sep=""))
+SMAC.model      <- readRDS(paste(curDir,"/resources/SMAC-model.rds",sep=""))
+SGAC.model      <- readRDS(paste(curDir,"/resources/SGACSINS-model.rds",sep=""))
+CIC.model       <- readRDS(paste(curDir,"/resources/CIC-model.rds",sep=""))
+CSIBLI.model    <- readRDS(paste(curDir,"/resources/CSIBLI-model.rds",sep=""))
+ACSINS.model    <- readRDS(paste(curDir,"/resources/ACSINS-model.rds",sep=""))
+HEK.model       <- readRDS(paste(curDir,"/resources/HEK-model.rds",sep=""))
+PSR.model       <- readRDS(paste(curDir,"/resources/PSR-model.rds",sep=""))
+ELISA.model     <- readRDS(paste(curDir,"/resources/ELISA-model.rds",sep=""))
+BVPELISA.model  <- readRDS(paste(curDir,"/resources/BVPELISA-model.rds",sep=""))
+DSF.model       <- readRDS(paste(curDir,"/resources/DSF-model.rds",sep=""))
+ACCSTAB.model   <- readRDS(paste(curDir,"/resources/ACCSTAB-model.rds",sep=""))
+
+HIC.pred        <- predict(HIC.model,      newdata = scaled.new)
+SMAC.pred       <- predict(SMAC.model,     newdata = scaled.new)
+SGAC.pred       <- predict(SGAC.model,     newdata = scaled.new)
+CIC.pred        <- predict(CIC.model,      newdata = scaled.new)
+CSIBLI.pred     <- predict(CSIBLI.model,   newdata = scaled.new)
+ACSINS.pred     <- predict(ACSINS.model,   newdata = scaled.new)
+HEK.pred        <- predict(HEK.model,      newdata = scaled.new)
+PSR.pred        <- predict(PSR.model,      newdata = scaled.new)
+ELISA.pred      <- predict(ELISA.model,    newdata = scaled.new)
+BVPELISA.pred   <- predict(BVPELISA.model, newdata = scaled.new)
+DSF.pred        <- predict(DSF.model,      newdata = scaled.new)
+ACCSTAB.pred    <- predict(ACCSTAB.model,  newdata = scaled.new)
+
+HIC.df          <- data.frame(protein.names,"HIC",     HIC.pred)
+SMAC.df         <- data.frame(protein.names,"SMAC",    SMAC.pred)
+SGAC.df         <- data.frame(protein.names,"SGAC",    SGAC.pred)
+CIC.df          <- data.frame(protein.names,"CIC",     CIC.pred)
+CSIBLI.df       <- data.frame(protein.names,"CSIBLI",  CSIBLI.pred)
+ACSINS.df       <- data.frame(protein.names,"ACSINS",  ACSINS.pred)
+HEK.df          <- data.frame(protein.names,"HEK",     HEK.pred)
+PSR.df          <- data.frame(protein.names,"PSR",     PSR.pred)
+ELISA.df        <- data.frame(protein.names,"ELISA",   ELISA.pred)
+BVPELISA.df     <- data.frame(protein.names,"BVPELISA",BVPELISA.pred)
+DSF.df          <- data.frame(protein.names,"DSF",     DSF.pred)
+ACCSTAB.df      <- data.frame(protein.names,"ACCSTAB", ACCSTAB.pred)
+
+write.csv(HIC.df,     paste(calcID,"-HIC-predictions.csv",sep=""),      row.names=FALSE)
+write.csv(SMAC.df,    paste(calcID,"-SMAC-predictions.csv",sep=""),     row.names=FALSE)
+write.csv(SGAC.df,    paste(calcID,"-SGAC-predictions.csv",sep=""),     row.names=FALSE)
+write.csv(CIC.df,     paste(calcID,"-CIC-predictions.csv",sep=""),      row.names=FALSE)
+write.csv(CSIBLI.df,  paste(calcID,"-CSIBLI-predictions.csv",sep=""),   row.names=FALSE)
+write.csv(ACSINS.df,  paste(calcID,"-ACSINS-predictions.csv",sep=""),   row.names=FALSE)
+write.csv(HEK.df,     paste(calcID,"-HEK-predictions.csv",sep=""),      row.names=FALSE)
+write.csv(PSR.df,     paste(calcID,"-PSR-predictions.csv",sep=""),      row.names=FALSE)
+write.csv(ELISA.df,   paste(calcID,"-ELISA-predictions.csv",sep=""),    row.names=FALSE)
+write.csv(BVPELISA.df,paste(calcID,"-BVPELISA-predictions.csv",sep=""), row.names=FALSE)
+write.csv(DSF.df,     paste(calcID,"-DSF-predictions.csv",sep=""),      row.names=FALSE)
+write.csv(ACCSTAB.df, paste(calcID,"-ACCSTAB-predictions.csv",sep=""),  row.names=FALSE)
