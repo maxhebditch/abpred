@@ -4,14 +4,14 @@
 
 This repository contains all of the code required to run the [protein-sol abpred](https://protein-sol.manchester.ac.uk) machine learning models trained on the [Jain 2017 dataset](https://doi.org/10.1073/pnas.1616408114) of 137 clinical stage therapeutic antibodies sequences and performance on 12 biophysical characterisation platforms.
 
-The paper describing this work has been submitted for consideration and the preprint is available at
+The paper describing this work has been submitted for consideration and the preprint will be available soon.
 
 This code can run predictions on multiple proteins.
 
 ## Installation
 
 ## Docker
-There is a docker image preconfigured with all necessary software and dependencies to run this software at
+There is a docker image preconfigured with all necessary software and dependencies to run this software [here](https://cloud.docker.com/repository/docker/maxhebditch/abpred).
 
 ## Conda virtual enviroment
 For this project, we have supplied a list of yaml configuration file (`abpred_env.yml`) that contains a list of all packages available for installation from [conda](https://conda.io/en/latest/).
