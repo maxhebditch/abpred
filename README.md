@@ -4,7 +4,7 @@
 
 This repository contains all of the code required to run the [protein-sol abpred](https://protein-sol.manchester.ac.uk) machine learning models trained on the [Jain 2017 dataset](https://doi.org/10.1073/pnas.1616408114) of 137 clinical stage therapeutic antibodies sequences and performance on 12 biophysical characterisation platforms.
 
-The paper describing this work has been submitted for consideration and the preprint will be available soon.
+The paper describing this work has been submitted for consideration and the preprint is available [here](https://www.biorxiv.org/content/10.1101/625830v1).
 
 This code can run predictions on multiple proteins.
 
